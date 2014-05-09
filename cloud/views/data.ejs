@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>Device Data</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+	</head>
+	<body>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<script type="text/javascript">
+			$(function() {
+			 Highcharts.setOptions({
+             global: {
+                timezoneOffset: -9 * 60
+            }
+    		});
+				$('#container').highcharts({
+					chart : {
+						type : 'spline'
+					},
+					title : {
+						text : 'Device <%= mac %>'
+					},
+					xAxis : {
+						type : 'datetime',
+						dateTimeLabelFormats : {// don't display the dummy year
+							month : '%m-%d',
+							year : '%y'
+						}
+					},
+					tooltip : {
+						formatter : function() {
+							return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%m-%d %H:%M:%S', this.x) + ': ' + this.y;
+						}
+					},
+
+					series : [{
+						name : "temperature",
+						data : [
+						<% data.forEach(function(d){ %>
+    						[<%= d.createdAt.getTime() %>, <%= d.get('t') %>],
+  						<% }) %>
+						]
+					},
+					{
+						name : "humidity",
+						data : [
+						<% data.forEach(function(d){ %>
+    						[<%= d.createdAt.getTime() %>, <%= d.get('h') %>],
+  						<% }) %>
+						]
+					}
+                    ]
+				});
+			});
+		</script>
+
+	</body>
+</html>
