@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Living": {
+            "applicationId": "pQZLIr5NXvErXQCAvdW30K9WPHZ92afu7FHdDgZM", 
+            "masterKey": "HoJ0AgyVSfrkCgLOCkAhEfXySxUkI8n8Lcm0LFPr"
+        }, 
+        "_default": {
+            "link": "Living"
+        }
+    }
+}
