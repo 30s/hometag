@@ -18,11 +18,29 @@ app.get('/data', function(req, res) {
     var bleTH = Parse.Object.extend("bleTH");
     var query = new Parse.Query(bleTH);
     query.equalTo("mac", req.query.mac);
+    query.descending('createdAt');
     query.find({
         success: function(results) {
             var ctx = { mac: req.query.mac, data: results };
             // res.send(ctx);
             res.render('data', ctx);
+        },
+        error: function(error) {
+            res.send(error);
+        }
+    });
+});
+
+app.get('/screen', function(req, res) {
+    var ScreenUsage = Parse.Object.extend("ScreenUsage");
+    var query = new Parse.Query(ScreenUsage);
+    query.descending('createdAt');
+    query.limit(500);
+    query.find({
+        success: function(results) {
+            var ctx = {data: results};
+            results.reverse();
+            res.render('screen', ctx);
         },
         error: function(error) {
             res.send(error);
