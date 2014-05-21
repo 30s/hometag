@@ -39,7 +39,7 @@
 						name : "screen_usage",
 						data : [
 						<% data.forEach(function(d){ %>
-    						[<%= d.createdAt.getTime() %>, <%= d.get('val') %>],
+    						[<%= d.get('ts') %>, <%= d.get('val') %>],
   						<% }) %>
 						]
 					}]

@@ -22,6 +22,7 @@ app.get('/data', function(req, res) {
     query.find({
         success: function(results) {
             var ctx = { mac: req.query.mac, data: results };
+            results.reverse();
             // res.send(ctx);
             res.render('data', ctx);
         },
