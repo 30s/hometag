@@ -35,8 +35,10 @@ app.get('/data', function(req, res) {
 app.get('/screen', function(req, res) {
     var ScreenUsage = Parse.Object.extend("ScreenUsage");
     var query = new Parse.Query(ScreenUsage);
-    query.descending('createdAt');
-    query.limit(500);
+    query.descending('ts');
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+    query.greaterThan('ts', date.getTime());
     query.find({
         success: function(results) {
             var ctx = {data: results};
