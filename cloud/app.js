@@ -39,6 +39,7 @@ app.get('/screen', function(req, res) {
     var date = new Date();
     date.setDate(date.getDate() - 1);
     query.greaterThan('ts', date.getTime());
+    query.limit(1000);
     query.find({
         success: function(results) {
             var ctx = {data: results};
